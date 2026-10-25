@@ -38,6 +38,27 @@
       <div class="strategy-point"><small>STORAGE</small><strong>Persistent SQLite records</strong></div>
       <div class="strategy-point"><small>DOCUMENTS</small><strong>Revision-aware drafts</strong></div>
     </div>
+
+    <div class="case-detail">
+      <h4>Inside the application</h4>
+      <p>Actual screenshots from the running Python app, using fictional sample records. Select an image to open it at full size.</p>
+    </div>
+    <div class="gallery" aria-label="Court Operations Desk application screenshots">
+      <a href="court-operations-overview.png"><img src="court-operations-overview.png" alt="Court Operations Desk Overview with hearing counts, intake follow-up, overdue tasks, a recorded balance, and activity history." width="1280" height="900" loading="lazy"></a>
+      <a href="court-operations-hearing.png"><img src="court-operations-hearing.png" alt="Hearings screen with a saved date and time change and the generated draft notice showing previous and updated hearing details." width="1280" height="900" loading="lazy"></a>
+    </div>
+    <div class="disclosure">Overview and hearing-notice screens captured from the running app on Linux. Appearance may differ by operating system.</div>
+    <div class="case-detail" id="court-operations-tutorial">
+      <h4>Quick walkthrough: reschedule a hearing</h4>
+      <ol class="experience-bullets">
+        <li>Download and extract the app. Run <code>python app.py</code>, then choose <strong>Load sample records</strong> on a fresh workspace.</li>
+        <li>Open <strong>Hearings</strong> and select case <strong>DEMO-2026-1042</strong>. Set the date to <strong>2026-11-13</strong> and time to <strong>11:00</strong>.</li>
+        <li>Choose <strong>Save record</strong>, then <strong>Prepare draft</strong>. Compare the old and new hearing details in the preview.</li>
+        <li>Open <strong>Documents</strong> to inspect the draft, record local review, or export a text copy. Preparing the same saved revision again reuses its existing draft.</li>
+      </ol>
+      <p>The nine-screen PDF guide also covers filing intake, case tasks, service tracking, payment records, the daily docket, document review, and template editing.</p>
+      <div class="browse-links"><a class="btn primary" href="court-operations-desk-tutorial.pdf" target="_blank" rel="noreferrer">Open screenshot tutorial PDF ↗</a><a class="btn secondary" href="court-operations-desk-tutorial.pdf" download>Download tutorial ↓</a></div>
+    </div>
     <div class="case-detail">
       <h4>What the application covers</h4>
       <div class="workstreams">
@@ -57,10 +78,11 @@
         <li><strong>Testing the awkward cases:</strong> missing fields, daylight-saving changes, repeated submissions, overpayments, reversals, and upgrades from the earlier database schema.</li>
       </ul>
       <div class="chips"><span class="chip">Python</span><span class="chip">Tkinter GUI</span><span class="chip">SQLite</span><span class="chip">Workflow validation</span><span class="chip">Document templates</span><span class="chip">Unit testing</span></div>
-      <div class="judgment"><strong>Prototype status &amp; technology</strong><p>The app runs on Python, with Python rules and placeholder templates. It explores concepts discussed alongside Apache Groovy and Apache Velocity, but does not execute either engine. Automated workflow tests pass; visual desktop QA remains outstanding. It records staff-entered data and does not send notices, process payments, calculate legal deadlines, or determine valid service.</p></div>
+      <div class="judgment"><strong>Prototype status &amp; technology</strong><p>The app runs on Python, with Python rules and placeholder templates. It explores concepts discussed alongside Apache Groovy and Apache Velocity, but does not execute either engine. Automated workflow tests pass. The main screens and hearing-notice workflow have been smoke-tested in a Linux virtual desktop. It records staff-entered data and does not send notices, process payments, calculate legal deadlines, or determine valid service.</p></div>
       <div class="browse-links"><a class="btn primary" href="court-operations-desk.zip" download>Download Python app ↓</a></div>
-      <p>Extract the ZIP and run <code>python app.py</code> with Python 3.11 or newer and Tk support. A Windows launcher, setup guide, sample records, and tests are included.</p>
+      <p>Extract the ZIP and run <code>python app.py</code> with Python 3.11 or newer and Tk support. A Windows launcher, screenshot tutorial PDF, setup guide, sample records, and tests are included.</p>
     </div>
   </article>
 </section>
 <section id="hobby" class="wrap"><div class="section-top"><div><span class="section-no mono">HOBBY PROJECT</span><h2 class="page-title">Risk tournament analysis.</h2></div><p>A short-lived project I worked on with three or four other people in the Warcraft III Risk community.</p></div><article class="case-study"><div class="case-copy"><div><span class="tag mono">SQL · LOCAL DATABASE · GAMING COMMUNITY</span><h3>Warcraft III Risk: Free-for-All Tournament Data</h3><p>Risk is a Warcraft III custom map that combines real-time strategy gameplay with a map of Europe. Our small group tracked tournament games and player results. I handled data ingestion and set up a local database so I could use SQL to manipulate and analyze the tournament data. I also built the analytics shared in YouTube videos reaching hundreds of people who followed the tournament scene.</p></div><div class="case-facts"><div><strong>The game records</strong><span>Game IDs, dates, video links, winners, game duration, and player counts.</span></div><div><strong>The player comparisons</strong><span>Wins, games played, win rate, average placement, kills, deaths, and kill/death ratios, with a date cutoff for the summaries.</span></div><div><strong>The rating experiment</strong><span>A custom weighted score labeled “ELO” in the workbook, combining win rate, placement, kill/death ratio, and rival counts.</span></div><div><strong>My contribution</strong><span>Data ingestion, local database setup, SQL data manipulation, and building the analytics shared in community YouTube videos.</span></div></div></div><div class="case-detail"><h4>My part in the project</h4><p>I took care of getting the tournament data into a local database and used SQL to manipulate it and do analytical work. I also built the analytics that were shared in the group’s YouTube videos.</p><p>The shared workbook links individual game results to player summaries using lookup and conditional aggregation formulas. It gave the group a way to compare players across games.</p><div class="chips"><span class="chip">SQL</span><span class="chip">Local database</span><span class="chip">Data ingestion</span><span class="chip">Excel</span><span class="chip">COUNTIFS / SUMIFS</span><span class="chip">INDEX / MATCH</span><span class="chip">Custom player rating</span><span class="chip">Collaboration</span></div><p><a class="btn secondary" href="risk-ffa-tournament-data.xlsx" download>Download tournament workbook ↓</a></p></div></article></section></main><footer class="footer"><div class="wrap"><span>© <span id="year"></span> Kevin Murray</span><span class="mono">Logan, UT · Open to relocation</span></div></footer><script src="portfolio.js"></script></body></html>
+
