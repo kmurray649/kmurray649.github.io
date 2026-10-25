@@ -24,17 +24,17 @@
   <div class="section-top"><div><span class="section-no mono">PYTHON DESKTOP APPLICATION</span><h2 id="court-project-title">Court Operations Desk.</h2></div><p>A local prototype for the administrative work around a case: intake, hearings, follow-up, documents, and payment records.</p></div>
   <article class="case-study">
     <div class="case-copy">
-      <div><span class="tag mono">PYTHON · TKINTER · SQLITE</span><h3>From court workflows to a working prototype</h3><p>I wanted to understand how court software turns administrative requirements into forms, validation rules, and documents. The desktop prototype connects those ideas in one local workspace.</p></div>
+      <div><span class="tag mono">PYTHON · GROOVY · VELOCITY · SQLITE</span><h3>From court workflows to a working prototype</h3><p>I wanted to understand how court software turns administrative requirements into forms, validation rules, and documents. The desktop prototype now uses a Python interface, actual Groovy rules, and actual Velocity templates in a local Java process.</p></div>
       <div class="case-facts">
         <div><strong>The problem explored</strong><span>Keeping case details, follow-up work, and generated documents consistent when records change.</span></div>
-        <div><strong>The approach</strong><span>Separate the interface from workflow rules and data storage, then test the behavior behind each screen.</span></div>
+        <div><strong>The approach</strong><span>Keep the interface and SQLite storage in Python, run hearing and intake rules in Groovy, and render documents through Velocity.</span></div>
         <div><strong>A concrete example</strong><span>Changing a hearing supersedes its earlier notice. Preparing the same saved revision again reuses the existing draft.</span></div>
         <div><strong>The scope</strong><span>A personal prototype with fictional records. It has not been deployed for a court or used to process real cases.</span></div>
       </div>
     </div>
     <div class="strategy-banner" aria-label="Project facts">
-      <div class="strategy-point"><small>INTERFACE</small><strong>10 application sections</strong></div>
-      <div class="strategy-point"><small>VALIDATION</small><strong>34 passing automated tests</strong></div>
+      <div class="strategy-point"><small>INTERFACE</small><strong>11 application sections</strong></div>
+      <div class="strategy-point"><small>VALIDATION</small><strong>40 passing automated tests</strong></div>
       <div class="strategy-point"><small>STORAGE</small><strong>Persistent SQLite records</strong></div>
       <div class="strategy-point"><small>DOCUMENTS</small><strong>Revision-aware drafts</strong></div>
     </div>
@@ -56,18 +56,18 @@
         <li>Choose <strong>Save record</strong>, then <strong>Prepare draft</strong>. Compare the old and new hearing details in the preview.</li>
         <li>Open <strong>Documents</strong> to inspect the draft, record local review, or export a text copy. Preparing the same saved revision again reuses its existing draft.</li>
       </ol>
-      <p>The nine-screen PDF guide also covers filing intake, case tasks, service tracking, payment records, the daily docket, document review, and template editing.</p>
+      <p>The ten-screen PDF guide also covers filing intake, case tasks, service tracking, payment records, the daily docket, document review, template editing, and verifying the actual Apache engines in Runtime.</p>
       <div class="browse-links"><a class="btn primary" href="court-operations-desk-tutorial.pdf" target="_blank" rel="noreferrer">Open screenshot tutorial PDF ↗</a><a class="btn secondary" href="court-operations-desk-tutorial.pdf" download>Download tutorial ↓</a></div>
     </div>
     <div class="case-detail">
       <h4>What the application covers</h4>
       <div class="workstreams">
-        <div class="workstream"><strong>Hearings &amp; daily docket</strong><p>Save hearing details, validate local dates and time zones, filter by date and courtroom, and flag identical start times.</p></div>
-        <div class="workstream"><strong>Filing intake</strong><p>Check administrative fields and attachment metadata, then route submissions to clerk review, follow-up, or manual classification.</p></div>
+        <div class="workstream"><strong>Hearings &amp; daily docket</strong><p>Save hearing details validated by Groovy, filter the docket by date and courtroom, and flag identical start times.</p></div>
+        <div class="workstream"><strong>Filing intake</strong><p>Run a Groovy checklist against administrative fields and attachment metadata, then route submissions to review, follow-up, or manual classification.</p></div>
         <div class="workstream"><strong>Case tasks</strong><p>Assign owners, enter due dates, and track overdue work. Categories include interpreter requests and records requests.</p></div>
         <div class="workstream"><strong>Service tracking</strong><p>Record service attempts, staff-reported outcomes, dates, and notes, with a summary available for export.</p></div>
         <div class="workstream"><strong>Fees &amp; recorded payments</strong><p>Track charges, payments, waivers, and balances in integer cents. Unique references prevent repeat entries; reversals retain the original record.</p></div>
-        <div class="workstream"><strong>Templates &amp; document review</strong><p>Edit required placeholders, prepare drafts, mark local reviews, export text copies, and inspect activity history.</p></div>
+        <div class="workstream"><strong>Templates &amp; document review</strong><p>Render notices and summaries with Apache Velocity, including #if conditions and #foreach loops; review drafts and export text copies.</p></div>
       </div>
     </div>
     <div class="case-detail">
@@ -77,12 +77,21 @@
         <li><strong>Keeping records consistent:</strong> detecting stale edits, reusing duplicate drafts, superseding earlier versions, and retaining ledger corrections.</li>
         <li><strong>Testing the awkward cases:</strong> missing fields, daylight-saving changes, repeated submissions, overpayments, reversals, and upgrades from the earlier database schema.</li>
       </ul>
-      <div class="chips"><span class="chip">Python</span><span class="chip">Tkinter GUI</span><span class="chip">SQLite</span><span class="chip">Workflow validation</span><span class="chip">Document templates</span><span class="chip">Unit testing</span></div>
-      <div class="judgment"><strong>Prototype status &amp; technology</strong><p>The app runs on Python, with Python rules and placeholder templates. It explores concepts discussed alongside Apache Groovy and Apache Velocity, but does not execute either engine. Automated workflow tests pass. The main screens and hearing-notice workflow have been smoke-tested in a Linux virtual desktop. It records staff-entered data and does not send notices, process payments, calculate legal deadlines, or determine valid service.</p></div>
+      <div class="chips"><span class="chip">Python</span><span class="chip">Tkinter GUI</span><span class="chip">Apache Groovy</span><span class="chip">Apache Velocity</span><span class="chip">Java 17+</span><span class="chip">SQLite</span><span class="chip">Workflow validation</span><span class="chip">Document templates</span><span class="chip">Unit testing</span></div>
+      <h4 id="groovy-velocity">How Groovy &amp; Velocity are incorporated</h4>
+      <div class="case-facts">
+        <div><strong>Apache Groovy: actual workflow execution</strong><span>Saving a hearing runs <code>hearing.groovy</code> for required fields, date/time, and time-zone checks. Saving a filing runs <code>intake.groovy</code> to return its review queue and missing-item messages.</span></div>
+        <div><strong>Apache Velocity: actual document rendering</strong><span>Preparing a draft sends saved case data and template text to Velocity. The intake <code>.vm</code> template uses <code>#if</code> and <code>#foreach</code> to choose wording and list missing items.</span></div>
+      </div>
+      <p>The Python GUI exchanges JSON with a persistent local Java process hosting both Apache engines. Python retains SQLite storage, document revisions, and the task, service, ledger, and docket workflows. There is no silent Python simulation fallback.</p>
+      <p>The <strong>Runtime</strong> screen reports live versions and execution counts, with tabs showing the bundled Groovy rules and Velocity template examples. Integration tests confirm that changing a Groovy script changes routing and that Velocity evaluates real conditions and loops.</p>
+      <a href="court-operations-runtime.png"><img src="court-operations-runtime.png" alt="Live Runtime screen reporting Apache Groovy 4.0.33, Apache Velocity 2.4.1, Java 17, execution counts, and the actual hearing rule source." width="1280" height="900" loading="lazy" style="display:block;width:100%;height:auto;border-radius:10px"></a>
+      <div class="judgment"><strong>Runtime &amp; prototype status</strong><p>Tested with Apache Groovy 4.0.33, Apache Velocity 2.4.1, and Java 17. All 40 automated tests pass, including six Apache engine integration tests. The main screens and hearing-notice workflow have been smoke-tested on Linux. This remains a personal prototype using fictional records; it does not send notices or process money.</p></div>
       <div class="browse-links"><a class="btn primary" href="court-operations-desk.zip" download>Download Python app ↓</a></div>
-      <p>Extract the ZIP and run <code>python app.py</code> with Python 3.11 or newer and Tk support. A Windows launcher, screenshot tutorial PDF, setup guide, sample records, and tests are included.</p>
+      <p>Extract the ZIP and run <code>python app.py</code> using Python 3.11+ with Tk support and Java 17+. The Groovy and Velocity libraries are bundled. A Windows launcher, screenshot tutorial PDF, setup guide, sample records, and tests are included.</p>
     </div>
   </article>
 </section>
 <section id="hobby" class="wrap"><div class="section-top"><div><span class="section-no mono">HOBBY PROJECT</span><h2 class="page-title">Risk tournament analysis.</h2></div><p>A short-lived project I worked on with three or four other people in the Warcraft III Risk community.</p></div><article class="case-study"><div class="case-copy"><div><span class="tag mono">SQL · LOCAL DATABASE · GAMING COMMUNITY</span><h3>Warcraft III Risk: Free-for-All Tournament Data</h3><p>Risk is a Warcraft III custom map that combines real-time strategy gameplay with a map of Europe. Our small group tracked tournament games and player results. I handled data ingestion and set up a local database so I could use SQL to manipulate and analyze the tournament data. I also built the analytics shared in YouTube videos reaching hundreds of people who followed the tournament scene.</p></div><div class="case-facts"><div><strong>The game records</strong><span>Game IDs, dates, video links, winners, game duration, and player counts.</span></div><div><strong>The player comparisons</strong><span>Wins, games played, win rate, average placement, kills, deaths, and kill/death ratios, with a date cutoff for the summaries.</span></div><div><strong>The rating experiment</strong><span>A custom weighted score labeled “ELO” in the workbook, combining win rate, placement, kill/death ratio, and rival counts.</span></div><div><strong>My contribution</strong><span>Data ingestion, local database setup, SQL data manipulation, and building the analytics shared in community YouTube videos.</span></div></div></div><div class="case-detail"><h4>My part in the project</h4><p>I took care of getting the tournament data into a local database and used SQL to manipulate it and do analytical work. I also built the analytics that were shared in the group’s YouTube videos.</p><p>The shared workbook links individual game results to player summaries using lookup and conditional aggregation formulas. It gave the group a way to compare players across games.</p><div class="chips"><span class="chip">SQL</span><span class="chip">Local database</span><span class="chip">Data ingestion</span><span class="chip">Excel</span><span class="chip">COUNTIFS / SUMIFS</span><span class="chip">INDEX / MATCH</span><span class="chip">Custom player rating</span><span class="chip">Collaboration</span></div><p><a class="btn secondary" href="risk-ffa-tournament-data.xlsx" download>Download tournament workbook ↓</a></p></div></article></section></main><footer class="footer"><div class="wrap"><span>© <span id="year"></span> Kevin Murray</span><span class="mono">Logan, UT · Open to relocation</span></div></footer><script src="portfolio.js"></script></body></html>
+
 
